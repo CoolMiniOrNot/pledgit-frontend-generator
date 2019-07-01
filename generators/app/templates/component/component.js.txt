@@ -23,8 +23,8 @@ const <%= name %> = props => {
 
   return (
 
-    <section className={ `pd-<%= kebabCaseName %> ${ className }` }>
-    </section>
+    <div className={ `pd-<%= kebabCaseName %> ${ className }` }>
+    </div>
 
   )
 

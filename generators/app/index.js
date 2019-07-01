@@ -1,8 +1,10 @@
-import Generator from 'yeoman-generator'
-import { kebabCase, merge } from 'lodash'
-const basePath = 'frontend/source'
+'use strict';
+const Generator = require( 'yeoman-generator' );
+const kebabCase = require( 'lodash/kebabCase' );
+const merge = require( 'lodash/merge' );
+const basePath = 'src'
 
-const mainPrompt = [
+const prompt = [
   {
     type: 'list',
     name: 'actionType',
@@ -13,11 +15,7 @@ const mainPrompt = [
     name: 'itemName',
     message: 'Provide a name:',
     validate: ( value ) => { return /^[A-Z][a-zA-Z0-9\/]*$/.test( value ) || 'Invalid name.' }
-  }
-]
-
-const secondaryPrompt = [
-  {
+  }, {
     type: 'confirm',
     name: 'includeSCSS',
     message: 'Generate related stylesheet?',
@@ -34,10 +32,8 @@ module.exports = class extends Generator {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   prompting() {
-    return this.prompt( mainPrompt ).then( props1 => {
-      return this.prompt( secondaryPrompt ).then( props2 => {
-        this.props = merge( props1, props2 )
-      } )
+    return this.prompt( prompt ).then( props => {
+      this.props = props
     } )
   }
 
@@ -58,6 +54,7 @@ module.exports = class extends Generator {
     }
 
     return {
+      kind: this.props.actionType.toLowerCase(),
       inputName: _itemName,
       kebabCaseName: kebabCase( _itemName ),
       destination: _destination,
@@ -67,8 +64,14 @@ module.exports = class extends Generator {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  createDefaultItem( kind ) {
+  createDefaultItem() {
     const data = this.parseData()
+    const kind = data.kind
+
+    console.log( '====================================' )
+    console.log( 'kind: ', kind )
+    console.log( 'data: ', data )
+    console.log( '====================================' )
 
     this.fs.copyTpl(
       this.templatePath( `${ kind }/${ kind }.js.txt` ),
@@ -105,7 +108,10 @@ module.exports = class extends Generator {
 
   writing() {
     const { actionType } = this.props
-    this.createDefaultItem( actionType.toLowerCase() )
+    console.log( '====================================' )
+    console.log( 'actionType: ', actionType )
+    console.log( '====================================' )
+    this.createDefaultItem( this.props )
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
