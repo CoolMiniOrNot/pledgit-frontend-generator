@@ -1,0 +1,34 @@
+import React, { useEffect, useContext } from 'react'
+
+import { GlobalContext } from '<%= folderLevels %>../../context/global-state'
+
+import './<%= kebabCaseName %>.scss'
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+const <%= name %> = props => {
+
+  const context = useContext( GlobalContext )
+  const { className = '' } = props
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  const initialize = () => { }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  useEffect( initialize, [] )
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  return (
+
+    <section className={ `pd-<%= kebabCaseName %> ${ className }` }>
+    </section>
+
+  )
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+}
+
+export default <%= name %>

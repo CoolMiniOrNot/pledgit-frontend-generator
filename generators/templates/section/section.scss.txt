@@ -1,0 +1,3 @@
+@import '<%= folderLevels %>../../assets/scss/variables.scss';
+
+.pd-<%= kebabCaseName %> {}
