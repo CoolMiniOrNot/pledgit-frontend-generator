@@ -1,0 +1,35 @@
+import React, { useState } from 'react'
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+export const <%= name %>Context = React.createContext()
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+export const <%= name %>State = props => {
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  
+
+  const [ item, setItem ] = useState( null )
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  const changeItem = value => {
+    setItem( value )
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  return (
+
+    <<%= name %>Context.Provider value={ {
+      item: item,
+      changeItem: changeItem
+    } }>
+      { props.children }
+    </<%= name %>Context.Provider >
+
+  )
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  
+}
